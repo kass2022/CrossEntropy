@@ -1,6 +1,4 @@
-from tkinter import X
 import numpy as np
-from GravityModel import underground
 
 class directional():
     def __init__(self, shape):
