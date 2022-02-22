@@ -38,10 +38,10 @@ class CGSolver:
     def updateSoluation(self):
         self.m = self.m - self.step * self.direction
 
-    def solve(self, epochs, errors):
+    def solve(self, epochs, error):
 
         self.epochs = epochs
-        self.errors = errors
+        self.error = error
         self.count = 0
 
         self.loss = np.zeros(self.epochs)
@@ -64,7 +64,7 @@ class CGSolver:
             if self.count == self.epochs:
                 break
 
-            if self.loss[self.count] < self.errors:
+            if self.loss[self.count] < self.error:
                 break
 
             self.computeBetadown()
@@ -74,6 +74,12 @@ class CGSolver:
             self.computeDirection()
             self.computeStep()
 
+def CGsolve(sensitivity, data, model_initial, epochs, error):
+    solver = CGSolver(sensitivity, data, model_initial)
+    solver.solve(epochs, error)
+    return solver.m 
+
+
 if __name__ == "__main__":
 
     # set sensitivity matrix, target data and initial model
@@ -81,20 +87,27 @@ if __name__ == "__main__":
     d = np.array([1, 25, 31, -4, 5])
     m0 = np.array([1.4, -9, 23, 4, 1.9])
 
-    # initial the CGsolver
-    solver = CGSolver(S, d, m0)
-
     # set max epochs and cut-off error
     epochs = 10
     error = 0
 
-    # solve the equation system
-    solver.solve(epochs, error)
+    def exampleSolver():
+        # initial the CGsolver
+        solver = CGSolver(S, d, m0)
+        # solve the equation system
+        solver.solve(epochs, error)
+        # print the result
+        result = solver.m
+        print(result)
 
-    # print the result
-    result = solver.m
-    print(result)
+    def exampleDirectlySolve():
+        result = CGsolve(S, d, m0, epochs, error)
+        print(result)
 
+    print("example 1, solve equation system by flexible solver")
+    exampleSolver()
 
+    print("example 2, solve equation system directly by a integrated function")
+    exampleDirectlySolve()
 
 
