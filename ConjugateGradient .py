@@ -16,7 +16,7 @@ class CGSolver:
         self.beta_down = 0
         self.beta_up = 0
 
-    def computeGradient(self, index):
+    def computeGradient(self):
         self.gradient = self.S.T.dot(self.S.dot(self.m)) - self.S.T.dot(self.d)
 
     def computeStep(self):
@@ -73,6 +73,27 @@ class CGSolver:
 
             self.computeDirection()
             self.computeStep()
+
+if __name__ == "__main__":
+
+    # set sensitivity matrix, target data and initial model
+    S = np.array([[1,1,1,1,1], [1,2,2,2,2], [1,2,3,3,3], [1,2,3,4,4], [1,2,3,4,5]])
+    d = np.array([1, 25, 31, -4, 5])
+    m0 = np.array([1.4, -9, 23, 4, 1.9])
+
+    # initial the CGsolver
+    solver = CGSolver(S, d, m0)
+
+    # set max epochs and cut-off error
+    epochs = 10
+    error = 0
+
+    # solve the equation system
+    solver.solve(epochs, error)
+
+    # print the result
+    result = solver.m
+    print(result)
 
 
 
