@@ -94,6 +94,9 @@ class CrossEntropy():
 
 if __name__ == "__main__":
 
+    import matplotlib.pyplot as plt
+    from ToolsFunction import Imshow
+
     # define 2 models of different properties : m1 and m2
     x_num = 100
     y_num = 100
@@ -114,90 +117,59 @@ if __name__ == "__main__":
     t.computeGradient()    
 
     # show the results
-    
-    import matplotlib.pyplot as plt
-
-    plt.figure()
+    plt.figure(figsize=(10, 8))
     figsize1 = 3
     figsize2 = 3
     slice_y = 50
     i = 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(m1[:,slice_y,:].T)
-    plt.colorbar()
-    plt.title("m1")
+    Imshow(m1[:,slice_y,:].T, "m1")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(m2[:,slice_y,:].T)
-    plt.colorbar()
-    plt.title("m2")
+    Imshow(m2[:,slice_y,:].T,"m2")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.x[:,slice_y,:].T)
-    plt.colorbar()
-    plt.title("tx")
+    Imshow(t.cross_entropy.x[:,slice_y,:].T,"tx")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.y[:,slice_y,:].T)
-    plt.colorbar()
-    plt.title("ty")
+    Imshow(t.cross_entropy.y[:,slice_y,:].T,"ty")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.z[:,slice_y,:].T)
-    plt.colorbar()
-    plt.title("tz")
+    Imshow(t.cross_entropy.z[:,slice_y,:].T,"tz")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.whole[:,slice_y,:].T)
-    plt.colorbar()
-    plt.title("t")
+    Imshow(t.cross_entropy.whole[:,slice_y,:].T,"t")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.property1.gradient[:,slice_y,:].T)
-    plt.colorbar()
-    plt.title("t_gradient")
+    Imshow(t.property1.gradient[:,slice_y,:].T,"t_gradient")
 
     plt.suptitle("y = 50")
 
-    plt.figure()
+    plt.figure(figsize=(10, 8))
     figsize1 = 3
     figsize2 = 3
     slice_z = 50
     i = 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(m1[:,:,slice_z].T)
-    plt.colorbar()
-    plt.title("m1")
+    Imshow(m1[:,:,slice_z].T,"m1")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(m2[:,:,slice_z].T)
-    plt.colorbar()
-    plt.title("m2")
+    Imshow(m2[:,:,slice_z].T,"m2")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.x[:,:,slice_z].T)
-    plt.colorbar()
-    plt.title("tx")
+    Imshow(t.cross_entropy.x[:,:,slice_z].T,"tx")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.y[:,:,slice_z].T)
-    plt.colorbar()
-    plt.title("ty")
+    Imshow(t.cross_entropy.y[:,:,slice_z].T,"ty")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.z[:,:,slice_z].T)
-    plt.colorbar()
-    plt.title("tz")
+    Imshow(t.cross_entropy.z[:,:,slice_z].T,"tz")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.cross_entropy.whole[:,:,slice_z].T)
-    plt.colorbar()
-    plt.title("t")
+    Imshow(t.cross_entropy.whole[:,:,slice_z].T,"t")
     i += 1
     plt.subplot(figsize1,figsize2,i)
-    plt.imshow(t.property1.gradient[:,:,slice_z].T)
-    plt.colorbar()
-    plt.title("t_gradient")
+    Imshow(t.property1.gradient[:,:,slice_z].T,"t_gradient")
 
     plt.suptitle("z = 50")
 

@@ -154,6 +154,7 @@ def graSensitivity(x_measure_start, x_measure_step, x_measure_end,
 
 if __name__ == "__main__":
 
+    from ToolsFunction import Imshow
     import matplotlib.pyplot as plt
 
     def exampleForward():
@@ -174,9 +175,8 @@ if __name__ == "__main__":
 
         # show the results
         plt.figure()
-        plt.imshow(model.anomaly)
-        plt.colorbar()
-        plt.title("anomaly")
+        Imshow(model.anomaly, "anomaly")
+
 
     def exampleSensitivity():
 
