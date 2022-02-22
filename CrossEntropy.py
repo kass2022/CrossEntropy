@@ -45,7 +45,6 @@ class CrossEntropy():
         self.property1 = data(property1, x_step, y_step, z_step)
         self.property2 = data(property2, x_step, y_step, z_step)
         self.cross_entropy = directional(self.property1.property.shape)
-        self.t = np.zeros(self.property1.property.shape)
 
         self.x_num, self.y_num, self.z_num = self.property1.property.shape
 
@@ -91,6 +90,8 @@ class CrossEntropy():
                 for k in range(1, self.z_num - 1):
                     computeGradientIJK(self.property1, self.property2, i, j, k)
 
+
+
 if __name__ == "__main__":
 
     # define 2 models of different properties : m1 and m2
@@ -106,7 +107,7 @@ if __name__ == "__main__":
         m2[:,:,i] = i
 
     # compute crossentropy of m1 and m2, also its gradient
-    x_step = 1000
+    x_step = 1000#(m)
     y_step = 1000
     z_step = 1000
     t = CrossEntropy(m1, m2, x_step, y_step, z_step)
