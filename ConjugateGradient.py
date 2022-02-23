@@ -17,11 +17,11 @@ class CGSolver:
         self.beta_down = 0
         self.beta_up = 0
 
-    def computeGradient(self):
-        self.gradient = self.S.T.dot(self.S.dot(self.m)) - self.S.T.dot(self.d)
+    def computeGradient(self, constrains = 0):
+        self.gradient = self.S.T.dot(self.S.dot(self.m)) - self.S.T.dot(self.d) + constrains
 
-    def computeStep(self):
-        self.step_down = np.sum((self.S.dot(self.direction)) ** 2)
+    def computeStep(self, constrains = 0):
+        self.step_down = np.sum((self.S.dot(self.direction)) ** 2) + constrains
         self.step = self.beta_up / self.step_down
 
     def computeDirection(self):
