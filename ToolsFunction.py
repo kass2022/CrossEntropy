@@ -13,8 +13,12 @@ def AddColorbar(image, aspect=14, pad_fraction=1, **kwargs):
     plt.sca(current_ax)
     return image.axes.figure.colorbar(image, cax=cax, **kwargs)
 
-def Imshow(data, title, cmap='bwr'):
+def Imshow(data, title, cmap='bwr', inverse = 'True'):
     norm = matplotlib.colors.Normalize(vmin=-np.max(abs(data)), vmax=np.max(abs(data)))
-    subfig = plt.imshow(data.T,cmap = cmap, origin='lower',norm = norm)
+    origin = 'lower'
+    if inverse == False:
+        origin = 'upper'
+    subfig = plt.imshow(data.T,cmap = cmap, origin=origin,norm = norm)
     AddColorbar(subfig)
+
     plt.title(title)

@@ -13,6 +13,7 @@ class CGSolver:
         self.direction = None
 
         self.step = 0
+        self.step_down = None
         self.beta_down = 0
         self.beta_up = 0
 
@@ -20,8 +21,8 @@ class CGSolver:
         self.gradient = self.S.T.dot(self.S.dot(self.m)) - self.S.T.dot(self.d)
 
     def computeStep(self):
-        down = np.sum((self.S.dot(self.direction)) ** 2)
-        self.step = self.beta_up / down
+        self.step_down = np.sum((self.S.dot(self.direction)) ** 2)
+        self.step = self.beta_up / self.step_down
 
     def computeDirection(self):
         self.direction = self.gradient + self.beta_up / self.beta_down * self.direction

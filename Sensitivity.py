@@ -134,7 +134,7 @@ class GraModel:
         self.computeSensitivity()
         self.property_vector = np.reshape(self.property, (self.modelnum,), order='F')
         self.anomaly_vector = self.sensitivity.dot(self.property_vector)
-        self.anomaly = np.reshape(self.anomaly_vector, (len(self.x_measure), len(self.y_measure)), order='F')
+        self.anomaly = np.reshape(self.anomaly_vector, (len(self.x_measure), len(self.y_measure)))
 
 def graSensitivity(x_measure_start, x_measure_step, x_measure_end,
                     y_measure_start, y_measure_step, y_measure_end,
